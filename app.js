@@ -55,12 +55,17 @@ function card(t, i) {
   const naverSet = new Set((t.naverLeaders || []).map((l) => l.code));
   const top = (t.stocks || []).slice(0, MAX_STOCKS);
   const streak = t.streakDays >= 2 ? ` · 🔥${t.streakDays}일` : "";
+  const aliases = t.aliases || [];
+  const aliasBadge = aliases.length
+    ? `<span class="alias" title="같은 대장주 테마 병합: ${esc(aliases.join(", "))}">+${aliases.length}</span>`
+    : "";
   return `
     <section class="card">
       <header class="card-h">
         <div class="card-title">
           <span class="rank">${i + 1}</span>
           <span class="tname">${esc(t.name)}${t.capCount ? ` 🔴×${t.capCount}` : ""}</span>
+          ${aliasBadge}
         </div>
         <span class="tval">${fmtEok(t.tradingValueEok)}억</span>
       </header>
