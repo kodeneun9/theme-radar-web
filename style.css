@@ -64,7 +64,9 @@ main { padding: 12px; }
 .bar-fill.down { background: #1d6fd6; }
 .bar-fill.flat { background: #c3c9d2; }
 .range { position: absolute; top: 1.5px; height: 2px; border-radius: 1px;
-         background: #737a84; }  /* 오늘 고가~저가 범위 = 윗/아랫꼬리 */
+         background: #737a84; }  /* 오늘 고가~저가 범위 = 윗/아랫꼬리 (상승/하락 색 적용) */
+.range.up { background: #e5342b; }
+.range.down { background: #1d6fd6; }
 
 /* 상한가 종목 행 강조 (사진의 노란 배경) */
 .stk.cap { background: #fff6c8; }
