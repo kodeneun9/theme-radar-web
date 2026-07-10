@@ -103,7 +103,7 @@ function crossRowBody(c) {
         ${rate}
       </div>
       <div class="xthemes">${esc(themes)}</div>
-      ${extLine(c.nxt)}${otLine(c.ot)}`;
+      ${extLine(c.nxt)}`;
 }
 
 function card(t, i) {
@@ -158,7 +158,7 @@ function renderTicker(d) {
   if (!box) return;
   const items = d.crossLeaders || [];
   if (!items.length) { box.classList.add("hidden"); tkSig = ""; return; }
-  const sig = items.map((c) => `${c.code}:${c.rate}:${c.count}:${c.ot && c.ot.price}:${c.nxt && c.nxt.price}`).join("|");
+  const sig = items.map((c) => `${c.code}:${c.rate}:${c.count}:${c.nxt && c.nxt.price}`).join("|");
   if (sig === tkSig) { box.classList.remove("hidden"); return; }
   tkSig = sig;
   const one = items.map((c) => `<span class="tk-item">${crossRowBody(c)}</span>`).join("");
