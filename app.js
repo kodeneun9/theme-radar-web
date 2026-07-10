@@ -65,6 +65,7 @@ function stockRow(s, judeokSet, naverSet) {
         <span>${fmtPrice(s.price)}</span>
         <span>${fmtEok(s.tvEok)}억</span>
       </div>
+      ${s.nxt ? `<div class="stk-nxt"><span class="nxt-tag">NXT</span> ${fmtPrice(s.nxt.price)} <span class="${cls(s.nxt.rate)}">${sign(s.nxt.rate)}${(s.nxt.rate || 0).toFixed(2)}%</span></div>` : ""}
       ${changeBar(s)}
     </li>`;
 }

@@ -67,6 +67,9 @@ main { padding: 12px; }
 .stk-rate { font-weight: bold; white-space: nowrap; margin-left: auto; flex: none; }
 .stk-sub { display: flex; justify-content: space-between;
            color: #6b7280; font-size: 13px; margin-top: 1px; }  /* +2pt */
+.stk-nxt { font-size: 12px; margin-top: 1px; color: #4b5563; }  /* NXT/시간외 시세 줄 */
+.nxt-tag { display: inline-block; background: #6d28d9; color: #fff; font-size: 9px;
+           font-weight: 800; border-radius: 3px; padding: 0 4px; vertical-align: 1px; }
 
 .up { color: #e5342b; }     /* 국내 관례: 상승 = 빨강 */
 .down { color: #1d6fd6; }   /* 하락 = 파랑 */
