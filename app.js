@@ -99,11 +99,20 @@ function card(t, i) {
 
 const pad2 = (n) => String(n).padStart(2, "0");
 
+// 장중(평일 09:00~15:35 KST)에만 스테일 경고 대상 — 장 마감 후 데이터 정지는 정상
+function isMarketHoursKST() {
+  const kst = new Date(Date.now() + (new Date().getTimezoneOffset() + 540) * 60000);
+  const day = kst.getDay();                          // 0=일 6=토
+  const hm = kst.getHours() * 60 + kst.getMinutes();
+  return day >= 1 && day <= 5 && hm >= 540 && hm <= 935;   // 09:00~15:35
+}
+
 function render(d) {
   const meta = document.getElementById("meta");
   const upd = new Date(d.updatedAt);
   const ageMin = Math.floor((Date.now() - upd.getTime()) / 60000);
-  const stale = ageMin > STALE_MIN ? ` <span class="stale">⚠ ${ageMin}분 전 데이터</span>` : "";
+  const stale = (ageMin > STALE_MIN && isMarketHoursKST())
+    ? ` <span class="stale">⚠ ${ageMin}분 전 데이터</span>` : "";
   const errs = d.status && !d.status.ok
     ? ` <span class="stale">⚠ 수집 오류 ${d.status.errors.length}건</span>` : "";
   const hhmmss = `${pad2(upd.getHours())}:${pad2(upd.getMinutes())}:${pad2(upd.getSeconds())}`;
