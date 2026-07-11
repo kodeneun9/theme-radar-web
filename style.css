@@ -122,9 +122,10 @@ footer { color: #8a919b; font-size: 11px; padding: 10px 14px; text-align: center
             animation: tkScroll 50s linear infinite; }
 .tk-track:hover { animation-play-state: paused; }   /* 마우스 올리면 일시정지 */
 .tk-copy { display: inline-flex; }
-.tk-item { display: inline-block; vertical-align: top; width: 280px;
+.tk-item { display: inline-block; vertical-align: top; max-width: 280px;
            white-space: normal; font-size: 15px;
            padding-right: 14px; margin-right: 14px; border-right: 1px solid #e2e6ec; }
+.tk-item .stk-top { white-space: nowrap; }   /* 이름줄이 접히지 않게 — 항목 폭은 내용에 맞춤 */
 .tk-item .xthemes { white-space: nowrap; text-overflow: ellipsis; }
 @keyframes tkScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .tk-track { animation: none; } }
