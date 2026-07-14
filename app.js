@@ -166,17 +166,31 @@ function histRowBody(r) {
       <div class="xthemes">과거 ${esc(r.theme)}${md ? ` (${md})` : ""} 테마로 등장</div>`;
 }
 
+// 개별 급등: 저유동 테마 카드에서 살린 강한 종목(카드로도 표시되지만 전광판에도 노출)
+function indivRowBody(r) {
+  const url = `https://m.stock.naver.com/domestic/stock/${esc(r.code)}/total`;
+  return `<div class="stk-top">
+        <a class="stk-name" href="${url}" target="_blank" rel="noopener">${esc(r.name)}</a>
+        <span class="xcnt">개별</span>
+        <span class="xrate ${cls(r.rate)}">${sign(r.rate)}${(r.rate || 0).toFixed(2)}%</span>
+      </div>
+      <div class="xthemes">${r.theme ? esc(r.theme) + " · " : ""}개별 급등</div>`;
+}
+
 function renderTicker(d) {
   const box = document.getElementById("xticker");
   if (!box) return;
   const items = d.crossLeaders || [];
   const hist = d.nepconRisers || [];
-  if (!items.length && !hist.length) { box.classList.add("hidden"); tkSig = ""; return; }
+  const indiv = d.individualRisers || [];
+  if (!items.length && !hist.length && !indiv.length) { box.classList.add("hidden"); tkSig = ""; return; }
   const sig = items.map((c) => `${c.code}:${c.rate}:${c.count}`).join("|")
-    + "#" + hist.map((r) => `${r.code}:${r.rate}`).join("|");
+    + "#" + hist.map((r) => `${r.code}:${r.rate}`).join("|")
+    + "#" + indiv.map((r) => `${r.code}:${r.rate}`).join("|");
   if (sig === tkSig) { box.classList.remove("hidden"); return; }
   tkSig = sig;
   const one = items.map((c) => `<span class="tk-item">${crossRowBody(c)}</span>`).join("")
+    + indiv.map((r) => `<span class="tk-item tk-hist">${indivRowBody(r)}</span>`).join("")
     + hist.map((r) => `<span class="tk-item tk-hist">${histRowBody(r)}</span>`).join("");
   const track = document.getElementById("tkTrack");
   track.innerHTML = `<span class="tk-copy">${one}</span><span class="tk-copy">${one}</span>`;
